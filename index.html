@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="A demo hub for humanitarian affairs, Human Rights Council monitoring and international humanitarian law resources."
+  >
+  <title>Humanitarian Affairs &amp; IHL Briefing Hub</title>
+
+  <style>
+    :root {
+      --red-dark: #5e0b15;
+      --red: #9b1b2e;
+      --red-light: #c0283d;
+
+      --rose: #f1c9ce;
+      --rose-light: #f8e6e8;
+      --paper: #fcf9f9;
+
+      --text: #2a2224;
+      --muted: #6e5f62;
+      --border: #e6d9db;
+      --card: #fff;
+      --focus: #1f5fbf;
+
+      --content-width: 1100px;
+
+      --database: hsl(212 55% 36%);
+      --commentary: hsl(8 55% 38%);
+      --forum: hsl(180 55% 30%);
+      --operational: hsl(36 65% 38%);
+      --training: hsl(322 55% 38%);
+
+      --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f1e7e8;
+        --muted: #bca9ad;
+        --border: #3e2a2e;
+        --paper: #170e10;
+        --card: #21151a;
+        --rose-light: #35191f;
+        --focus: #8db4f7;
+      }
+    }
+
+    :root[data-theme="light"] {
+      --text: #2a2224;
+      --muted: #6e5f62;
+      --border: #e6d9db;
+      --paper: #fcf9f9;
+      --card: #fff;
+      --rose-light: #f8e6e8;
+      --focus: #1f5fbf;
+    }
+
+    :root[data-theme="dark"] {
+      --text: #f1e7e8;
+      --muted: #bca9ad;
+      --border: #3e2a2e;
+      --paper: #170e10;
+      --card: #21151a;
+      --rose-light: #35191f;
+      --focus: #8db4f7;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--red);
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      color: var(--red-light);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 1rem;
+      left: -9999px;
+      z-index: 20;
+      padding: .5rem 1rem;
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .skip-link:focus {
+      left: 1rem;
+    }
+
+    .justify {
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 2rem 1.25rem;
+      background: linear-gradient(180deg, var(--red-dark), #3f0710);
+      color: #f6e3e6;
+    }
+
+    .brand {
+      margin: 0;
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: .55rem;
+      color: var(--rose);
+      font-size: .8rem;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: .15rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav a {
+      display: block;
+      padding: .55rem .75rem;
+      border-left: 3px solid transparent;
+      border-radius: 4px;
+      color: #f3dade;
+      font-size: .95rem;
+      text-decoration: none;
+    }
+
+    .nav a:hover {
+      background: rgba(255, 255, 255, .07);
+      color: #fff;
+    }
+
+    .nav a[aria-current="page"] {
+      border-left-color: var(--rose);
+      background: rgba(255, 255, 255, .12);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .snapshot {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, .18);
+      color: var(--rose);
+      font-size: .8rem;
+    }
+
+    .snapshot strong {
+      color: #fff;
+    }
+
+    main {
+      width: 100%;
+      max-width: var(--content-width);
+      padding: 2.5rem clamp(1rem, 4vw, 3.5rem) 4rem;
+    }
+
+    main > section {
+      scroll-margin-top: 110px;
+    }
+
+    section[hidden] {
+      display: none;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--red-dark);
+      line-height: 1.2;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      h1,
+      h2,
+      h3 {
+        color: #f4bac2;
+      }
+    }
+
+    :root[data-theme="dark"] h1,
+    :root[data-theme="dark"] h2,
+    :root[data-theme="dark"] h3 {
+      color: #f4bac2;
+    }
+
+    h1 {
+      margin: 0 0 .6rem;
+      font-size: clamp(1.75rem, 3vw, 2.4rem);
+    }
+
+    h2 {
+      margin: 2.25rem 0 .75rem;
+      font-size: 1.3rem;
+    }
+
+    h3 {
+      margin: 0 0 .35rem;
+      font-size: 1.05rem;
+    }
+
+    .lede {
+      max-width: 70ch;
+      margin: 0 0 1.75rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .prose {
+      max-width: 72ch;
+    }
+
+    .prose p {
+      margin: 0 0 1rem;
+    }
+
+    .tag {
+      --hue: 0;
+
+      display: inline-block;
+      margin: 0 .25rem .3rem 0;
+      padding: .1rem .5rem;
+      border: 1px solid hsl(var(--hue) 40% 82%);
+      border-radius: 3px;
+      background: hsl(var(--hue) 50% 95%);
+      color: hsl(var(--hue) 55% 30%);
+      font-size: .76rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .tag.theme::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: .4rem;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .tag.forum {
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    button {
+      padding: .5rem .9rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--card);
+      color: var(--text);
+      font-size: .9rem;
+    }
+
+    button:hover {
+      border-color: var(--red);
+    }
+
+    button.primary {
+      border-color: var(--red);
+      background: var(--red);
+      color: #fff;
+    }
+
+    button.primary:hover {
+      background: var(--red-dark);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .guide {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      max-width: 900px;
+    }
+
+    .guide-card {
+      display: block;
+      padding: 1.1rem 1.2rem 1.2rem;
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--red);
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .guide-card:nth-child(2) {
+      border-top-color: var(--red-light);
+    }
+
+    .guide-card:nth-child(3) {
+      border-top-color: var(--red-dark);
+    }
+
+    .guide-card:nth-child(4) {
+      border-top-color: #d9606f;
+    }
+
+    .guide-card:hover {
+      border-color: var(--red);
+    }
+
+    .guide-card p {
+      margin: .3rem 0 0;
+      font-size: .93rem;
+    }
+
+    .guide-card .try {
+      margin-top: .6rem;
+      color: var(--muted);
+      font-size: .87rem;
+    }
+
+    .taxonomy {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: .9rem 1.5rem;
+      max-width: 900px;
+      margin: 0;
+      padding: 1.2rem 1.3rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    .taxonomy dt {
+      font-weight: 700;
+    }
+
+    .taxonomy dd {
+      margin: 0;
+    }
+
+    .taxonomy dd p {
+      margin: 0 0 .45rem;
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    .note {
+      max-width: 72ch;
+      margin-top: 2rem;
+      padding: .9rem 1.1rem;
+      border-left: 4px solid var(--red);
+      background: var(--rose-light);
+      font-size: .95rem;
+    }
+
+    .explain {
+      max-width: 78ch;
+      margin-bottom: 1.5rem;
+      padding: 1rem 1.2rem;
+      border-radius: 4px;
+      background: var(--rose-light);
+      font-size: .97rem;
+    }
+
+    .explain h2 {
+      margin: 0 0 .35rem;
+      font-size: 1rem;
+    }
+
+    .explain p {
+      margin: 0;
+    }
+
+    .memo {
+      max-width: 78ch;
+      padding: 2rem clamp(1.1rem, 3vw, 2.5rem) 2.25rem;
+      border: 1px solid var(--border);
+      border-top: 6px solid var(--red);
+      background: var(--card);
+    }
+
+    .memo-head {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: .3rem 1.25rem;
+      margin-bottom: .5rem;
+      padding-bottom: 1.1rem;
+      border-bottom: 1px solid var(--border);
+      font-size: .92rem;
+    }
+
+    .memo-head dt {
+      color: var(--muted);
+    }
+
+    .memo-head dd {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .memo h2 {
+      margin: 1.6rem 0 .6rem;
+      padding-bottom: .3rem;
+      border-bottom: 2px solid var(--rose-light);
+      font-size: 1.1rem;
+    }
+
+    .memo ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .memo li {
+      margin-bottom: 1.1rem;
+      font-size: 1rem;
+    }
+
+    .memo li p {
+      margin: 0;
+    }
+
+    .lead {
+      color: var(--red-dark);
+      font-weight: 700;
+    }
+
+    .why {
+      margin-top: .3rem !important;
+      padding-left: .8rem;
+      border-left: 3px solid var(--rose);
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .src {
+      margin-left: .25rem;
+      font-size: .8rem;
+    }
+
+    .dates {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: .45rem 1.2rem;
+      margin: 0;
+    }
+
+    .dates dt {
+      color: var(--red-dark);
+      font-size: .92rem;
+      font-weight: 700;
+    }
+
+    .dates dd {
+      margin: 0;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      gap: .75rem;
+      margin-bottom: 1rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+      min-width: 180px;
+      color: var(--muted);
+      font-size: .85rem;
+      font-weight: 500;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      padding: .5rem .6rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--card);
+      color: var(--text);
+      font-size: .95rem;
+    }
+
+    .count {
+      margin: 0 0 .5rem;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    table {
+      width: 100%;
+      min-width: 880px;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: .92rem;
+    }
+
+    th {
+      padding: .7rem .8rem;
+      background: var(--red-dark);
+      color: #fff;
+      font-size: .83rem;
+      text-align: left;
+    }
+
+    td {
+      padding: .85rem .8rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    td.context {
+      color: var(--red-dark);
+      font-weight: 700;
+    }
+
+    tr.detail td {
+      padding: 1rem 1.25rem 1.25rem;
+      background: var(--rose-light);
+    }
+
+    tr.detail p {
+      max-width: 84ch;
+      margin: 0 0 .6rem;
+    }
+
+    .toggle {
+      padding: .3rem .6rem;
+      font-size: .8rem;
+      white-space: nowrap;
+    }
+
+    .empty {
+      padding: 2rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .session {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 2.5rem;
+      margin-bottom: .75rem;
+      padding: 1.1rem 1.25rem;
+      border: 1px solid var(--border);
+      border-left: 6px solid var(--red);
+      background: var(--card);
+    }
+
+    .session div {
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .session strong {
+      display: block;
+      color: var(--red-dark);
+      font-size: 1.05rem;
+    }
+
+    .track {
+      margin: 1.25rem 0 0 .5rem;
+      padding: 0;
+      border-left: 2px solid var(--border);
+      list-style: none;
+    }
+
+    .track li {
+      position: relative;
+      padding: 0 0 1.4rem 1.4rem;
+    }
+
+    .track li::before {
+      content: "";
+      position: absolute;
+      top: .4rem;
+      left: -7px;
+      width: 12px;
+      height: 12px;
+      border: 2px solid var(--rose);
+      border-radius: 50%;
+      background: var(--card);
+    }
+
+    .track li.held::before {
+      border-color: var(--red);
+      background: var(--red);
+    }
+
+    .track .when {
+      color: var(--muted);
+      font-size: .85rem;
+      font-weight: 500;
+    }
+
+    .status {
+      display: inline-block;
+      margin-left: .45rem;
+      padding: .05rem .45rem;
+      border-radius: 3px;
+      font-size: .74rem;
+      font-weight: 700;
+      vertical-align: 1px;
+    }
+
+    .status.held {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .status.next {
+      border: 1px solid var(--rose);
+      background: var(--rose-light);
+      color: var(--red);
+    }
+
+    .track p {
+      max-width: 72ch;
+      margin: .2rem 0 0;
+      font-size: .95rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .chip {
+      padding: .4rem .8rem;
+      border-radius: 20px;
+      font-size: .85rem;
+      font-weight: 600;
+      transition:
+        background-color .15s ease,
+        border-color .15s ease,
+        color .15s ease;
+    }
+
+    .chip.all {
+      border-color: var(--red);
+      background: var(--rose-light);
+      color: var(--red);
+    }
+
+    .chip.database {
+      border-color: var(--database);
+      background: hsl(212 50% 95%);
+      color: var(--database);
+    }
+
+    .chip.commentary {
+      border-color: var(--commentary);
+      background: hsl(8 50% 95%);
+      color: var(--commentary);
+    }
+
+    .chip.forum {
+      border-color: var(--forum);
+      background: hsl(180 50% 95%);
+      color: var(--forum);
+    }
+
+    .chip.operational {
+      border-color: var(--operational);
+      background: hsl(36 60% 94%);
+      color: var(--operational);
+    }
+
+    .chip.training {
+      border-color: var(--training);
+      background: hsl(322 50% 95%);
+      color: var(--training);
+    }
+
+    .chip[aria-pressed="true"] {
+      color: #fff;
+    }
+
+    .chip.all[aria-pressed="true"] {
+      background: var(--red);
+    }
+
+    .chip.database[aria-pressed="true"] {
+      background: var(--database);
+    }
+
+    .chip.commentary[aria-pressed="true"] {
+      background: var(--commentary);
+    }
+
+    .chip.forum[aria-pressed="true"] {
+      background: var(--forum);
+    }
+
+    .chip.operational[aria-pressed="true"] {
+      background: var(--operational);
+    }
+
+    .chip.training[aria-pressed="true"] {
+      background: var(--training);
+    }
+
+    .library {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .resource {
+      --resource-colour: var(--red);
+
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+      padding: 1.1rem 1.2rem 1.2rem;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--resource-colour);
+      background: var(--card);
+    }
+
+    .resource[data-type="Database"] {
+      --resource-colour: var(--database);
+    }
+
+    .resource[data-type="Commentary & Case Law"] {
+      --resource-colour: var(--commentary);
+    }
+
+    .resource[data-type="UN Forum"] {
+      --resource-colour: var(--forum);
+    }
+
+    .resource[data-type="Operational Data"] {
+      --resource-colour: var(--operational);
+    }
+
+    .resource[data-type="Training"] {
+      --resource-colour: var(--training);
+    }
+
+    .resource .type {
+      color: var(--resource-colour);
+      font-size: .82rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .resource h3 {
+      margin: .05rem 0 .15rem;
+    }
+
+    .resource p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .resource .go {
+      margin-top: auto;
+      font-size: .9rem;
+      font-weight: 500;
+    }
+
+    footer {
+      max-width: 80ch;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    @media (max-width: 820px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: sticky;
+        height: auto;
+        padding: 1rem;
+        gap: .75rem;
+        z-index: 5;
+      }
+
+      .brand {
+        font-size: 1.05rem;
+      }
+
+      .brand small,
+      .snapshot {
+        display: none;
+      }
+
+      .nav {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: .25rem;
+        padding-bottom: .25rem;
+      }
+
+      .nav a {
+        padding: .45rem .6rem;
+        border-left: 0;
+        border-bottom: 3px solid transparent;
+        border-radius: 0;
+        white-space: nowrap;
+      }
+
+      .nav a[aria-current="page"] {
+        border-bottom-color: var(--rose);
+        background: transparent;
+      }
+
+      main {
+        padding-top: 1.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .guide {
+        grid-template-columns: 1fr;
+      }
+
+      .memo-head,
+      .taxonomy,
+      .dates {
+        grid-template-columns: 1fr;
+      }
+
+      .memo-head dd {
+        margin-bottom: .4rem;
+      }
+
+      .field {
+        flex: 1 1 150px;
+        min-width: 0;
+      }
+
+      .field input,
+      .field select {
+        min-width: 0;
+      }
+    }
+
+    @media print {
+      .sidebar,
+      .actions,
+      .explain,
+      .skip-link,
+      footer {
+        display: none;
+      }
+
+      .shell {
+        display: block;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      section {
+        display: none !important;
+      }
+
+      section#briefing {
+        display: block !important;
+      }
+
+      .memo {
+        padding: 0;
+        border: 0;
+      }
+
+      body {
+        background: #fff;
+        color: #000;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="shell">
+    <aside class="sidebar">
+      <p class="brand">
+        Humanitarian Affairs &amp; IHL Briefing Hub
+        <small>
+          A personal demonstration project for organising humanitarian updates.
+        </small>
+      </p>
+
+      <nav aria-label="Sections">
+        <ul class="nav" id="nav">
+          <li><a href="#about">About</a></li>
+          <li><a href="#briefing">Weekly Briefing</a></li>
+          <li><a href="#contexts">Contexts</a></li>
+          <li><a href="#hrc">HRC Monitoring</a></li>
+          <li><a href="#library">IHL Resources</a></li>
+        </ul>
+      </nav>
+
+      <div class="snapshot">
+        Information snapshot<br>
+        <strong id="snapshotDate"></strong><br>
+        Fixed snapshot, not a live tracker.
+      </div>
+    </aside>
+
+    <main id="main">
+      <section id="about" aria-labelledby="about-heading">
+        <h1 id="about-heading">What is this Hub?</h1>
+
+        <p class="lede justify" id="about-lede"></p>
+
+        <div class="prose">
+          <h2>Purpose</h2>
+
+          <p class="justify">
+            Humanitarian work often involves bringing together information
+            from several different sources before a meeting or briefing.
+            This hub puts some of that material in one place: (1) a weekly
+            briefing, (2) selected country and territory updates, (3) a Human
+            Rights Council timeline and (4) a small library of IHL resources.
+          </p>
+
+          <p class="justify">
+            The entries are tagged by context, theme and forum so that the
+            same material can be viewed from different angles.
+          </p>
+        </div>
+
+        <h2>How to Use It</h2>
+
+        <div class="guide">
+          <a class="guide-card" href="#briefing">
+            <h3>Weekly Briefing</h3>
+            <p>
+              An example of an internal briefing note covering
+              developments relevant to humanitarian engagement.
+            </p>
+            <p class="try">Coverage: Week of 28 September 2026.</p>
+          </a>
+
+          <a class="guide-card" href="#contexts">
+            <h3>Contexts</h3>
+            <p>
+              A searchable table of selected developments, with links to
+              the sources used for each entry.
+            </p>
+            <p class="try">
+              Coverage: Sudan, DRC, Ukraine and the OPT.
+            </p>
+          </a>
+
+          <a class="guide-card" href="#hrc">
+            <h3>HRC Monitoring</h3>
+            <p>
+              A timeline of Human Rights Council items relevant to the
+              humanitarian contexts covered here.
+            </p>
+            <p class="try">Coverage: 63rd regular session.</p>
+          </a>
+
+          <a class="guide-card" href="#library">
+            <h3>IHL Resources</h3>
+            <p>
+              A selection of legal, institutional and operational sources
+              for checking briefing material and carrying out research.
+            </p>
+            <p class="try">
+              Coverage: Databases, UN forums, operational data and research tools.
+            </p>
+          </a>
+        </div>
+
+        <h2>How Information is Organised</h2>
+
+        <dl class="taxonomy">
+          <dt>Context</dt>
+          <dd>
+            <p>The country or territory concerned.</p>
+          </dd>
+
+          <dt>Theme</dt>
+          <dd>
+            <p>The humanitarian or IHL issue involved.</p>
+            <div id="themeLegend"></div>
+          </dd>
+
+          <dt>Forum</dt>
+          <dd>
+            <p>The forum in which the issue is being discussed.</p>
+            <div id="forumLegend"></div>
+          </dd>
+
+          <dt>Resource Type</dt>
+          <dd>
+            <p>The category used in the resource library.</p>
+            <div id="typeLegend"></div>
+          </dd>
+
+          <dt>Updated</dt>
+          <dd>
+            <p>The date on which an entry was last checked against its source.</p>
+          </dd>
+        </dl>
+
+        <div class="prose">
+          <h2>Sources and Standards</h2>
+
+          <ul>
+            <li class="justify">
+              Public sources are used, with priority given to UN primary
+              sources and other authoritative institutional material.
+            </li>
+            <li class="justify">
+              Statements are attributed to the organisation or mechanism
+              that made them and figures are shown with their verified source.
+            </li>
+            <li class="justify">
+              This site is a fixed snapshot prepared on 1 October 2026,
+              rather than a live monitoring product.
+            </li>
+          </ul>
+        </div>
+
+        <p class="note justify">
+          This is an independent personal project for demonstration
+          purposes. It is not affiliated with the ICRC, the UN or any
+          other organisation.
+        </p>
+      </section>
+
+      <section id="briefing" aria-labelledby="briefing-heading" hidden>
+        <h1 id="briefing-heading">Weekly Humanitarian Affairs Briefing</h1>
+
+        <div class="explain">
+          <h2>About this briefing</h2>
+          <p class="justify">
+            This is an example of a short weekly note for an engagement
+            team. Each item gives the development, why it may matter for
+            humanitarian work and a source. The note belongs to the
+            1 October 2026 snapshot and is not a live update.
+          </p>
+        </div>
+
+        <div class="actions">
+          <button class="primary" type="button" id="printBriefing">
+            Print Briefing
+          </button>
+
+          <button type="button" id="openContexts">
+            Open Contexts
+          </button>
+        </div>
+
+        <article class="memo" id="briefingMemo"></article>
+      </section>
+
+      <section id="contexts" aria-labelledby="contexts-heading" hidden>
+        <h1 id="contexts-heading">Contexts</h1>
+
+        <p class="lede justify">
+          Selected developments by context, with humanitarian themes and
+          forums. The filters are there to make it easier to use the material for
+          a particular meeting.
+        </p>
+
+        <div class="filters">
+          <label class="field">
+            Search
+            <input
+              id="search"
+              type="search"
+              placeholder="e.g. access, winter, Ebola"
+            >
+          </label>
+
+          <label class="field">
+            Theme
+            <select id="themeFilter">
+              <option value="">All themes</option>
+            </select>
+          </label>
+
+          <label class="field">
+            Forum
+            <select id="forumFilter">
+              <option value="">All forums</option>
+            </select>
+          </label>
+
+          <button type="button" id="clearFilters">
+            Clear Filters
+          </button>
+
+          <button type="button" id="exportCsv">
+            Export CSV
+          </button>
+        </div>
+
+        <p class="count" id="contextCount" aria-live="polite"></p>
+
+        <div class="table-wrap">
+          <table>
+            <colgroup>
+              <col style="width:15%">
+              <col style="width:20%">
+              <col>
+              <col style="width:9%">
+              <col style="width:11%">
+              <col style="width:9%">
+            </colgroup>
+
+            <thead>
+              <tr>
+                <th scope="col">Context</th>
+                <th scope="col">Themes</th>
+                <th scope="col">Latest Development</th>
+                <th scope="col">Forums</th>
+                <th scope="col">Updated</th>
+                <th scope="col">Details</th>
+              </tr>
+            </thead>
+
+            <tbody id="contextRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="hrc" aria-labelledby="hrc-heading" hidden>
+        <h1 id="hrc-heading">Human Rights Council Monitoring</h1>
+
+        <p class="lede justify">
+          Selected items from the 63rd regular session that relate to
+          humanitarian contexts, as of 1 October 2026.
+        </p>
+
+        <div class="session">
+          <div>
+            Session
+            <strong>HRC63, Palais des Nations</strong>
+          </div>
+
+          <div>
+            Scheduled dates
+            <strong>7 September – 7 October 2026</strong>
+          </div>
+
+          <div>
+            Official programme
+            <strong>
+              <a
+                href="https://www.ohchr.org/en/hr-bodies/hrc/regular-sessions/session63/regular-session"
+                target="_blank"
+                rel="noopener"
+              >
+                OHCHR Session Page
+              </a>
+            </strong>
+          </div>
+        </div>
+
+        <p class="count">
+          Check the official programme for current meeting times and
+          session changes before using these entries.
+        </p>
+
+        <ol class="track" id="hrcTimeline"></ol>
+      </section>
+
+      <section id="library" aria-labelledby="library-heading" hidden>
+        <h1 id="library-heading">IHL and Humanitarian Resources</h1>
+
+        <p class="lede justify">
+          A collection of sources for research, briefing preparation and checking IHL-related information. The selection is aimed at practical research rather than general training.
+        </p>
+
+        <div
+          class="chips"
+          id="resourceFilters"
+          role="group"
+          aria-label="Filter by resource type"
+        ></div>
+
+        <div class="library" id="resourceList"></div>
+      </section>
+
+      <footer>
+        Independent demonstration project. Not affiliated with any
+        organisation. Fixed information snapshot prepared on
+        <span id="footerDate"></span>.
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const SNAPSHOT = "2026-10-01";
+
+    const THEME_HUES = {
+      "Conduct of hostilities": 8,
+      "Humanitarian access": 175,
+      "Displacement": 36,
+      "Health in armed conflict": 135,
+      "Critical infrastructure": 212,
+      "Children": 322,
+      "Essential services": 262
+    };
+
+    const FORUM_HUES = {
+      HRC: 352,
+      IASC: 180,
+      WHO: 205,
+      UNGA: 285
+    };
+
+    const TYPE_HUES = {
+      Database: 212,
+      "Commentary & Case Law": 8,
+      "UN Forum": 180,
+      "Operational Data": 36,
+      Training: 322
+    };
+
+    const contexts = [
+      {
+        name: "Sudan",
+        region: "Africa",
+        themes: [
+          "Conduct of hostilities",
+          "Humanitarian access",
+          "Displacement"
+        ],
+        forums: ["HRC", "IASC"],
+        latest:
+          "HRC63 opened on 7 September with an interactive dialogue on the Fact-Finding Mission for the Sudan and an oral update by the High Commissioner on El Obeid, North Kordofan.",
+        detail:
+          "The 2026 response plan identifies 33.7 million people in need, with $2.9 billion required. Hostilities have intensified across Darfur and Kordofan, while relative stability in Khartoum and Aj Jazirah has enabled more than 2.2 million returns.",
+        relevance:
+          "(1) Protection of civilians during hostilities, (2) Safe and unhindered humanitarian access and (3) Protection risks for people fleeing conflict areas.",
+        sources: [
+          {
+            label: "OHCHR – HRC63 programme",
+            url: "https://www.ohchr.org/en/meeting-summaries/2026/09/human-rights-council-hold-its-sixty-third-regular-session-7-september-7?sub-site=HRC"
+          },
+          {
+            label: "OCHA – Sudan HNRP 2026",
+            url: "https://www.unocha.org/publications/report/sudan/sudan-humanitarian-needs-and-response-plan-2026-summary"
+          }
+        ],
+        updated: "2026-10-01"
+      },
+
+      {
+        name: "Democratic Republic of the Congo",
+        region: "Africa",
+        themes: [
+          "Health in armed conflict",
+          "Displacement",
+          "Humanitarian access"
+        ],
+        forums: ["IASC", "WHO"],
+        latest:
+          "Security incidents at Kigonze displacement camp in Bunia, Ituri, since 20 September have forced families to flee, complicating the response to the Ebola outbreak.",
+        detail:
+          "The latest situation report records 8,067 confirmed Ebola cases and 3,901 deaths. Ituri is the epicentre, while North Kivu cases reached a record high in mid-September. The 2026 appeal of $1.4 billion targets needs of nearly 15 million people.",
+        relevance:
+          "(1) Civilian character of displacement sites, (2) Access for health workers and (3) Continuity of infection prevention and control amid insecurity.",
+        sources: [
+          {
+            label: "UN News – Ebola and access",
+            url: "https://news.un.org/en/story/2026/09/1168465"
+          },
+          {
+            label: "OCHA – DRC",
+            url: "https://www.unocha.org/democratic-republic-congo"
+          }
+        ],
+        updated: "2026-10-01"
+      },
+
+      {
+        name: "Ukraine",
+        region: "Europe",
+        themes: [
+          "Conduct of hostilities",
+          "Critical infrastructure",
+          "Children"
+        ],
+        forums: ["HRC", "UNGA"],
+        latest:
+          "In its 21 September oral update, the Commission of Inquiry raised concern about attacks on energy infrastructure ahead of winter, the militarisation of education and the recruitment of foreign nationals.",
+        detail:
+          "The Commission is due to report to the General Assembly's 81st session in October 2026 and present a comprehensive report at HRC64. In March 2026 it concluded that the forcible transfer of children and enforced disappearances amount to crimes against humanity.",
+        relevance:
+          "(1) Protection of civilian objects and objects indispensable to civilian survival and (2) Children and missing persons.",
+        sources: [
+          {
+            label: "OHCHR – Commission press release",
+            url: "https://www.ohchr.org/en/press-releases/2026/09/un-commission-concerned-about-human-impact-russias-systematic-targeting"
+          },
+          {
+            label: "OHCHR – Commission of Inquiry",
+            url: "https://www.ohchr.org/en/hr-bodies/hrc/iicihr-ukraine/index"
+          }
+        ],
+        updated: "2026-10-01"
+      },
+
+      {
+        name: "Occupied Palestinian Territory",
+        region: "Middle East",
+        themes: [
+          "Humanitarian access",
+          "Essential services",
+          "Displacement"
+        ],
+        forums: ["IASC", "HRC"],
+        latest:
+          "Stop-gap fuel funding was announced on 17-18 September to keep Gaza's health services running on back-up generators while the electricity grid is down.",
+        detail:
+          "The Humanitarian Coordinator allocated $2 million from the oPt Humanitarian Fund, while Qatar announced 1.5 million litres of fuel. OCHA notes that approvals for solar equipment and restarting the Gaza Power Plant are needed for a more sustainable solution.",
+        relevance:
+          "(1) Functioning of essential services, (2) Access for humanitarian goods and (3) Displacement camps.",
+        sources: [
+          {
+            label: "OCHA oPt – 18 September 2026",
+            url: "https://www.ochaopt.org/content/humanitarian-situation-report-18-september-2026"
+          },
+          {
+            label: "OCHA oPt – 11 September 2026",
+            url: "https://www.ochaopt.org/content/humanitarian-situation-report-11-september-2026"
+          }
+        ],
+        updated: "2026-10-01"
+      }
+    ];
+
+    const HRC = [
+      {
+        date: "2026-09-07",
+        item: "Item 2",
+        title:
+          "Interactive Dialogue: Independent International Fact-Finding Mission for the Sudan",
+        note:
+          "Interactive dialogue on the Mission's report, including its work concerning the situation in Sudan.",
+        url:
+          "https://hrcportal.ohchr.org/63rd-regular-session-human-rights-council-0"
+      },
+      {
+        date: "2026-09-07",
+        item: "Item 2",
+        title:
+          "High Commissioner: Oral Update on El Obeid",
+        note:
+          "The High Commissioner presented an oral update on the human rights situation in and around El Obeid, North Kordofan.",
+        url:
+          "https://hrcportal.ohchr.org/63rd-regular-session-human-rights-council-0"
+      },
+      {
+        date: "2026-09-07",
+        item: "Item 2",
+        title:
+          "Opening of HRC63 and High Commissioner's Annual Update",
+        note:
+          "The session opened with the High Commissioner's presentation under Item 2.",
+        url:
+          "https://hrcportal.ohchr.org/63rd-regular-session-human-rights-council-0"
+      },
+      {
+        date: "2026-09-21",
+        item: "Item 4",
+        title:
+          "Interactive Dialogue: Commission of Inquiry on Ukraine",
+        note:
+          "The Commission presented an oral update on its investigations, followed by an interactive dialogue.",
+        url:
+          "https://www.unognewsroom.org/story/en/3271/hrc-63-human-rights-in-ukraine-21-september-2026"
+      },
+      {
+        date: "2026-09-24",
+        item: "Procedure",
+        title:
+          "Deadline for Submitting Draft Proposals",
+        note:
+          "Deadline for submitting draft proposals for action during HRC63. Extensions require Council approval and are limited to exceptional circumstances.",
+        url:
+          "https://transcripts.un.org/en/asset/k1j/k1jozddqv1"
+      },
+      {
+        date: "2026-10-02",
+        item: "Item 10",
+        title:
+          "Interactive Dialogue: High Commissioner on Haiti",
+        note:
+          "Interactive dialogue on the High Commissioner's oral update on Haiti, with participation of a human rights expert.",
+        url:
+          "https://hrcportal.ohchr.org/63rd-regular-session-human-rights-council-0"
+      },
+      {
+        date: "2026-10-02",
+        item: "Item 10",
+        title:
+          "Interactive Dialogue: High Commissioner on Ukraine",
+        note:
+          "Interactive dialogue on the High Commissioner's oral update on Ukraine.",
+        url:
+          "https://hrcportal.ohchr.org/63rd-regular-session-human-rights-council-0"
+      },
+      {
+        date: null,
+        sort: "2026-10-05",
+        when: "5–7 October",
+        item: "Action",
+        title:
+          "Action on Draft Resolutions and Decisions",
+        note:
+          "Closing days of HRC63. Monitor adoption of draft resolutions and decisions and any related voting or explanations of vote.",
+        url:
+          "https://hrcportal.ohchr.org/63rd-regular-session-human-rights-council-0"
+      }
+    ];
+
+    const resources = [
+      {
+        title: "Treaties and States Parties",
+        type: "Database",
+        url: "https://ihl-databases.icrc.org/",
+        desc:
+          "The Geneva Conventions, Additional Protocols and other IHL treaties, with ratification information."
+      },
+      {
+        title: "Customary IHL",
+        type: "Database",
+        url: "https://ihl-databases.icrc.org/en/customary-ihl",
+        desc:
+          "Rules of customary international humanitarian law and the state practice supporting them."
+      },
+      {
+        title: "Universal Human Rights Index",
+        type: "Database",
+        url: "https://uhri.ohchr.org/",
+        desc:
+          "A searchable database of recommendations and observations from UN human rights mechanisms, useful for researching country-specific human rights issues."
+      },
+      {
+        title: "How Does Law Protect in War?",
+        type: "Commentary & Case Law",
+        url: "https://casebook.icrc.org/",
+        desc:
+          "An ICRC casebook analysing situations under IHL and how particular rules apply in practice."
+      },
+      {
+        title: "Geneva Conventions and their Commentaries",
+        type: "Commentary & Case Law",
+        url: "https://www.icrc.org/en/law-and-policy/geneva-conventions-and-their-commentaries",
+        desc:
+          "ICRC commentaries on the Geneva Conventions and Additional Protocols, including discussion of how treaty provisions are interpreted."
+      },
+      {
+        title: "Human Rights Council – HRC63",
+        type: "UN Forum",
+        url:
+          "https://www.ohchr.org/en/hr-bodies/hrc/regular-sessions/session63/regular-session",
+        desc:
+          "Programme of work, reports and information relating to the 63rd regular session of the Human Rights Council."
+      },
+      {
+        title: "UN Web TV – Human Rights Council",
+        type: "UN Forum",
+        url: "https://webtv.un.org/",
+        desc:
+          "Live and archived UN meetings, including HRC sessions and other relevant proceedings."
+      },
+      {
+        title: "UN Digital Library",
+        type: "UN Forum",
+        url: "https://digitallibrary.un.org/",
+        desc:
+          "Searchable UN documentation, resolutions, reports, meeting records and other official material."
+      },
+      {
+        title: "Inter-Agency Standing Committee",
+        type: "UN Forum",
+        url: "https://interagencystandingcommittee.org/",
+        desc:
+          "Humanitarian coordination, policy and operational information relevant to humanitarian engagement."
+      },
+      {
+        title: "ReliefWeb",
+        type: "Operational Data",
+        url: "https://reliefweb.int/",
+        desc:
+          "Situation reports, operational updates, key figures and maps from humanitarian organisations."
+      },
+      {
+        title: "OCHA",
+        type: "Operational Data",
+        url: "https://www.unocha.org/",
+        desc:
+          "Humanitarian response plans, funding requirements, situation updates and country-level operational information."
+      }
+    ];
+
+    const briefing = {
+      week: "Week of 28 September 2026",
+      subject:
+        "'HRC63 Closing Phase and Humanitarian Developments in Relevant Contexts'",
+
+      developments: [
+        {
+          lead: "DRC",
+          what:
+            "Insecurity at Kigonze displacement camp in Bunia since 20 September is displacing families in the midst of the Ebola outbreak.",
+          why:
+            "Insecurity at displacement sites can disrupt infection control and access to care, complicating both protection and health operations.",
+          source: [
+            "UN News",
+            "https://news.un.org/en/story/2026/09/1168465"
+          ]
+        },
+        {
+          lead: "Ukraine",
+          what:
+            "The Commission of Inquiry warned on 21 September about the humanitarian impact of attacks on energy infrastructure as winter approaches.",
+          why:
+            "Damage to power and heating infrastructure can increase civilian vulnerability during winter and raises questions concerning the protection of civilian objects.",
+          source: [
+            "OHCHR",
+            "https://www.ohchr.org/en/press-releases/2026/09/un-commission-concerned-about-human-impact-russias-systematic-targeting"
+          ]
+        },
+        {
+          lead: "Gaza",
+          what:
+            "Fuel funding announced on 17–18 September is intended to keep health services operating on back-up generators while the electricity grid remains down.",
+          why:
+            "The arrangement provides short-term support for essential services while longer-term restoration of electricity remains unresolved.",
+          source: [
+            "OCHA oPt",
+            "https://www.ochaopt.org/content/humanitarian-situation-report-18-september-2026"
+          ]
+        },
+        {
+          lead: "Sudan",
+          what:
+            "Humanitarian needs remain exceptionally high, with the 2026 response plan identifying 33.7 million people in need.",
+          why:
+            "Continued hostilities in Darfur and Kordofan create protection concerns and can restrict humanitarian access.",
+          source: [
+            "OCHA",
+            "https://www.unocha.org/publications/report/sudan/sudan-humanitarian-needs-and-response-plan-2026-summary"
+          ]
+        }
+      ],
+
+      council: [
+        {
+          lead: "HRC63",
+          what:
+            "The Council has entered the closing phase of its 63rd regular session, with action on draft resolutions expected during the final days.",
+          why:
+            "Adopted resolutions can affect mandates, reporting requirements and follow-up by Council mechanisms.",
+          source: [
+            "UN transcripts",
+            "https://transcripts.un.org/en/hrc/63/24"
+          ]
+        }
+      ],
+
+      comingUp: [
+        [
+          "Early October",
+          "HRC63: Action on draft resolutions during the closing days of the session."
+        ],
+        [
+          "October",
+          "UN General Assembly: Formal dialogue concerning the Commission of Inquiry on Ukraine."
+        ],
+        [
+          "Feb–Mar 2027",
+          "HRC64: Planned comprehensive reporting by the Commission of Inquiry on Ukraine."
+        ]
+      ]
+    };
+
+    const $ = (selector) => document.querySelector(selector);
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"]/g, (character) => {
+        const entities = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          "\"": "&quot;"
+        };
+
+        return entities[character];
+      });
+    }
+
+    function formatDate(value) {
+      if (!value) {
+        return "";
+      }
+
+      return new Date(`${value}T12:00:00`).toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+      });
+    }
+
+    function makeTag(text, hue, className = "") {
+      return `
+        <span
+          class="tag ${className}"
+          style="--hue:${hue}"
+        >${escapeHtml(text)}</span>
+      `;
+    }
+
+    function themeTag(theme) {
+      return makeTag(
+        theme,
+        THEME_HUES[theme] ?? 0,
+        "theme"
+      );
+    }
+
+    function forumTag(forum) {
+      return makeTag(
+        forum,
+        FORUM_HUES[forum] ?? 0,
+        "forum"
+      );
+    }
+
+    function typeTag(type) {
+      return makeTag(
+        type,
+        TYPE_HUES[type] ?? 0
+      );
+    }
+
+    $("#snapshotDate").textContent = formatDate(SNAPSHOT);
+    $("#footerDate").textContent = formatDate(SNAPSHOT);
+
+    $("#about-lede").textContent =
+      `A small demo workspace for organising humanitarian ` +
+      `updates, Human Rights Council and IHL information. It is a fixed ` +
+      `snapshot prepared on ${formatDate(SNAPSHOT)} using public sources.`;
+
+    $("#themeLegend").innerHTML =
+      Object.keys(THEME_HUES)
+        .map(themeTag)
+        .join("");
+
+    $("#forumLegend").innerHTML =
+      Object.keys(FORUM_HUES)
+        .map(forumTag)
+        .join("");
+
+    $("#typeLegend").innerHTML =
+      Object.keys(TYPE_HUES)
+        .map(typeTag)
+        .join("");
+
+    function briefingPoint(point) {
+      return `
+        <li>
+          <p class="justify">
+            <span class="lead">${escapeHtml(point.lead)}.</span>
+            ${escapeHtml(point.what)}
+            <a
+              class="src"
+              href="${escapeHtml(point.source[1])}"
+              target="_blank"
+              rel="noopener"
+            >${escapeHtml(point.source[0])}</a>
+          </p>
+
+          <p class="why justify">
+            <strong>Why it matters:</strong>
+            ${escapeHtml(point.why)}
+          </p>
+        </li>
+      `;
+    }
+
+    $("#briefingMemo").innerHTML = `
+      <dl class="memo-head">
+        <dt>To</dt>
+        <dd>External Engagement Team</dd>
+
+        <dt>Date</dt>
+        <dd>${escapeHtml(briefing.week)}</dd>
+
+        <dt>Subject</dt>
+        <dd>${escapeHtml(briefing.subject)}</dd>
+      </dl>
+
+      <h2>Key Developments</h2>
+      <ul>
+        ${briefing.developments.map(briefingPoint).join("")}
+      </ul>
+
+      <h2>At the Human Rights Council</h2>
+      <ul>
+        ${briefing.council.map(briefingPoint).join("")}
+      </ul>
+
+      <h2>Coming Up</h2>
+      <dl class="dates">
+        ${briefing.comingUp.map(([date, text]) => `
+          <dt>${escapeHtml(date)}</dt>
+          <dd>${escapeHtml(text)}</dd>
+        `).join("")}
+      </dl>
+    `;
+
+    function uniqueValues(key) {
+      return [
+        ...new Set(
+          contexts.flatMap((context) => context[key])
+        )
+      ].sort();
+    }
+
+    uniqueValues("themes").forEach((theme) => {
+      $("#themeFilter").add(new Option(theme, theme));
+    });
+
+    uniqueValues("forums").forEach((forum) => {
+      $("#forumFilter").add(new Option(forum, forum));
+    });
+
+    function getFilteredContexts() {
+      const query = $("#search").value.trim().toLowerCase();
+      const theme = $("#themeFilter").value;
+      const forum = $("#forumFilter").value;
+
+      return contexts.filter((context) => {
+        const searchable = [
+          context.name,
+          context.region,
+          context.latest,
+          context.detail,
+          context.relevance,
+          ...context.themes,
+          ...context.forums
+        ]
+          .join(" ")
+          .toLowerCase();
+
+        return (
+          (!theme || context.themes.includes(theme)) &&
+          (!forum || context.forums.includes(forum)) &&
+          (!query || searchable.includes(query))
+        );
+      });
+    }
+
+    function renderContexts() {
+      const visible = getFilteredContexts();
+
+      $("#contextCount").textContent =
+        `Showing ${visible.length} of ${contexts.length} contexts`;
+
+      if (!visible.length) {
+        $("#contextRows").innerHTML = `
+          <tr>
+            <td colspan="6" class="empty">
+              No contexts match the current filters.
+              <button type="button" id="emptyClear">
+                Clear Filters
+              </button>
+            </td>
+          </tr>
+        `;
+
+        $("#emptyClear").addEventListener(
+          "click",
+          clearContextFilters
+        );
+
+        return;
+      }
+
+      $("#contextRows").innerHTML = visible
+        .map((context, index) => `
+          <tr>
+            <td class="context">${escapeHtml(context.name)}</td>
+
+            <td>
+              ${context.themes.map(themeTag).join("")}
+            </td>
+
+            <td>
+              ${escapeHtml(context.latest)}
+            </td>
+
+            <td>
+              ${context.forums.map(forumTag).join("")}
+            </td>
+
+            <td style="white-space:nowrap">
+              ${formatDate(context.updated)}
+            </td>
+
+            <td>
+              <button
+                type="button"
+                class="toggle"
+                aria-expanded="false"
+                aria-controls="context-detail-${index}"
+              >
+                Details
+              </button>
+            </td>
+          </tr>
+
+          <tr
+            id="context-detail-${index}"
+            class="detail"
+            hidden
+          >
+            <td colspan="6">
+              <p class="justify">
+                ${escapeHtml(context.detail)}
+              </p>
+
+              <p class="justify">
+                <strong>Humanitarian relevance:</strong>
+                ${escapeHtml(context.relevance)}
+              </p>
+
+              <p>
+                <strong>Sources:</strong>
+                ${context.sources.map((source) => `
+                  <a
+                    href="${escapeHtml(source.url)}"
+                    target="_blank"
+                    rel="noopener"
+                  >${escapeHtml(source.label)}</a>
+                `).join(" · ")}
+              </p>
+            </td>
+          </tr>
+        `)
+        .join("");
+
+      document
+        .querySelectorAll("#contextRows .toggle")
+        .forEach((button) => {
+          button.addEventListener("click", () => {
+            const row = document.getElementById(
+              button.getAttribute("aria-controls")
+            );
+
+            const expanded =
+              button.getAttribute("aria-expanded") === "true";
+
+            button.setAttribute(
+              "aria-expanded",
+              String(!expanded)
+            );
+
+            button.textContent = expanded ? "Details" : "Hide";
+            row.hidden = expanded;
+          });
+        });
+    }
+
+    function clearContextFilters() {
+      $("#search").value = "";
+      $("#themeFilter").value = "";
+      $("#forumFilter").value = "";
+      renderContexts();
+    }
+
+    $("#search").addEventListener("input", renderContexts);
+    $("#themeFilter").addEventListener("change", renderContexts);
+    $("#forumFilter").addEventListener("change", renderContexts);
+
+    $("#clearFilters").addEventListener(
+      "click",
+      clearContextFilters
+    );
+
+    $("#exportCsv").addEventListener("click", () => {
+      const csvValue = (value) =>
+        `"${String(value).replace(/"/g, '""')}"`;
+
+      const header = [
+        "Context",
+        "Region",
+        "Themes",
+        "Forums",
+        "Latest development",
+        "Detail",
+        "Humanitarian relevance",
+        "Sources",
+        "Updated"
+      ];
+
+      const rows = getFilteredContexts().map((context) => [
+        context.name,
+        context.region,
+        context.themes.join("; "),
+        context.forums.join("; "),
+        context.latest,
+        context.detail,
+        context.relevance,
+        context.sources.map((source) => source.url).join(" "),
+        context.updated
+      ]);
+
+      const csv = [
+        header.map(csvValue).join(","),
+        ...rows.map((row) => row.map(csvValue).join(","))
+      ].join("\r\n");
+
+      const blob = new Blob(
+        ["\ufeff", csv],
+        { type: "text/csv;charset=utf-8" }
+      );
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = `contexts-${SNAPSHOT}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      URL.revokeObjectURL(url);
+    });
+
+    renderContexts();
+
+    function renderHrcTimeline() {
+      const today = new Date(`${SNAPSHOT}T00:00:00`);
+
+      $("#hrcTimeline").innerHTML = HRC
+        .map((item) => {
+          const hasDate = Boolean(item.date);
+          const date = hasDate
+            ? new Date(`${item.date}T00:00:00`)
+            : null;
+
+          const held = hasDate && date < today;
+          const when = item.when || formatDate(item.date);
+
+          return `
+            <li class="${held ? "held" : ""}">
+              <span class="when">
+                ${escapeHtml(when)}, ${escapeHtml(item.item)}
+              </span>
+
+              <span class="status ${held ? "held" : "next"}">
+                ${held ? "Held" : "Upcoming"}
+              </span>
+
+              <h3>${escapeHtml(item.title)}</h3>
+
+              <p class="justify">
+                ${escapeHtml(item.note)}
+                <a
+                  class="src"
+                  href="${escapeHtml(item.url)}"
+                  target="_blank"
+                  rel="noopener"
+                >Source</a>
+              </p>
+            </li>
+          `;
+        })
+        .join("");
+    }
+
+    renderHrcTimeline();
+
+    const resourceTypes = [
+      "All",
+      ...new Set(resources.map((resource) => resource.type))
+    ];
+
+    let selectedType = "All";
+
+    const resourceClasses = {
+      All: "all",
+      Database: "database",
+      "Commentary & Case Law": "commentary",
+      "UN Forum": "forum",
+      "Operational Data": "operational",
+      Training: "training"
+    };
+
+    function renderResources() {
+      $("#resourceFilters").innerHTML = resourceTypes
+        .map((type) => `
+          <button
+            type="button"
+            class="chip ${resourceClasses[type] || "all"}"
+            aria-pressed="${type === selectedType}"
+            data-type="${escapeHtml(type)}"
+          >
+            ${escapeHtml(type)}
+          </button>
+        `)
+        .join("");
+
+      $("#resourceList").innerHTML = resources
+        .filter((resource) =>
+          selectedType === "All" ||
+          resource.type === selectedType
+        )
+        .map((resource) => `
+          <article
+            class="resource"
+            data-type="${escapeHtml(resource.type)}"
+          >
+            <span class="type">
+              ${escapeHtml(resource.type)}
+            </span>
+
+            <h3>${escapeHtml(resource.title)}</h3>
+
+            <p>${escapeHtml(resource.desc)}</p>
+
+            <a
+              class="go"
+              href="${escapeHtml(resource.url)}"
+              target="_blank"
+              rel="noopener"
+            >
+              Open Resource
+            </a>
+          </article>
+        `)
+        .join("");
+    }
+
+    $("#resourceFilters").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-type]");
+
+      if (!button) {
+        return;
+      }
+
+      selectedType = button.dataset.type;
+      renderResources();
+    });
+
+    renderResources();
+
+    $("#printBriefing").addEventListener(
+      "click",
+      () => window.print()
+    );
+
+    $("#openContexts").addEventListener(
+      "click",
+      () => {
+        location.hash = "contexts";
+      }
+    );
+
+    const sections = [
+      "about",
+      "briefing",
+      "contexts",
+      "hrc",
+      "library"
+    ];
+
+    function showSection() {
+      const requested = location.hash.slice(1);
+      const active = sections.includes(requested)
+        ? requested
+        : "about";
+
+      sections.forEach((section) => {
+        document.getElementById(section).hidden =
+          section !== active;
+      });
+
+      document.querySelectorAll("#nav a").forEach((link) => {
+        const current =
+          link.getAttribute("href") === `#${active}`;
+
+        if (current) {
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener("hashchange", showSection);
+
+    showSection();
+  </script>
+</body>
+</html>
